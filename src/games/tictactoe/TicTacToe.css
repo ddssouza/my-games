@@ -1,0 +1,48 @@
+.cell {
+  all: unset;
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+  background-color: var(--color-purple-dark);
+  color: white;
+  font-weight: 900;
+  font-size: 40px;
+}
+
+.cell:hover {
+  background-color: var(--color-purple-medium);
+}
+
+.cell:disabled {
+  background-color: var(--color-green-metal);
+}
+
+.cell.winner:disabled {
+  background-color: var(--color-purple-light);
+}
+
+.cell:nth-child(2n) {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.row:nth-child(2n) {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.grid {
+  margin: 50px 100px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.game-over {
+  //background-color: var(--color-purple-light);
+  max-width: 300px;
+  margin: auto;
+  padding: 20px;
+}
