@@ -46,3 +46,28 @@
   margin: auto;
   padding: 20px;
 }
+
+.scores {
+  display: flex;
+  justify-content: center;
+}
+
+.scores > div {
+  width: 200px;
+}
+
+.reset {
+  all: unset;
+  background-color: var(--color-purple-dark);
+  border-radius: 10px;
+  width: 150px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.reset:hover {
+  background-color: var(--color-purple-medium);
+}

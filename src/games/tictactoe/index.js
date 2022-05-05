@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faO, faXmark } from "@fortawesome/free-solid-svg-icons";
 import "./TicTacToe.css";
 
-const cols = 5;
-const rows = 5;
+const cols = 3;
+const rows = 3;
 const player1 = 1;
 const player2 = 2;
 
@@ -39,6 +39,7 @@ const TicTacToe = () => {
   const [currentPlayer, setPlayer] = useState(1);
   const [grid, setGrid] = useState(initialGrid(rows, cols));
   const [isGameOver, setIsGameOver] = useState(false);
+  const [score, setScore] = useState({ [player1]: 0, [player2]: 0 });
 
   const handleUserSelection = ({ row, col }) => {
     let isValid = false;
@@ -102,13 +103,26 @@ const TicTacToe = () => {
         }, []);
         break;
     }
+
     setGrid(updatedGrid);
     setIsGameOver(isValid);
     setPlayer(currentPlayer === player1 ? player2 : player1);
+    if (isValid) {
+      const newScore = score;
+      newScore[currentPlayer] = newScore[currentPlayer] + 1;
+
+      setScore(newScore);
+    }
+  };
+
+  const resetGame = () => {
+    setIsGameOver(false);
+    setGrid(initialGrid(rows, cols));
   };
 
   return (
     <div className="wrapper">
+      <h2>Tic Tac Toe</h2>
       <div className="grid">
         {grid.map((row, key) => (
           <div className="row" key={key}>
@@ -125,7 +139,22 @@ const TicTacToe = () => {
           </div>
         ))}
       </div>
+      <div className="scores">
+        <div>
+          <h4>Player 1</h4>
+          <p>{score[1]}</p>
+        </div>
+        <div>
+          <h4>Player 2</h4>
+          <p>{score[2]}</p>
+        </div>
+      </div>
       {isGameOver && <div className="game-over">Game Over!</div>}
+      {isGameOver && (
+        <button className="reset" onClick={() => resetGame()}>
+          Reset
+        </button>
+      )}
     </div>
   );
 };
