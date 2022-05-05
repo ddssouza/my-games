@@ -1,12 +1,12 @@
 .cell {
   all: unset;
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
   cursor: pointer;
   background-color: var(--color-purple-dark);
   color: white;
   font-weight: 900;
-  font-size: 40px;
+  font-size: 60px;
 }
 
 .cell:hover {
@@ -14,7 +14,7 @@
 }
 
 .cell:disabled {
-  background-color: var(--color-green-metal);
+  /* background-color: var(--color-green-metal); */
 }
 
 .cell.winner:disabled {

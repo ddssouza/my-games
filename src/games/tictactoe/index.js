@@ -34,7 +34,7 @@ const validate = (set) =>
 const markAsPlayed = (player) => (
   <FontAwesomeIcon icon={player === 1 ? faXmark : faO} />
 );
-// pra validar: 3 da mesma coluna, 3 da mesma linha ou 1 de cada coluna e linha
+
 const TicTacToe = () => {
   const [currentPlayer, setPlayer] = useState(1);
   const [grid, setGrid] = useState(initialGrid(rows, cols));
@@ -56,6 +56,7 @@ const TicTacToe = () => {
     const diag1 = getPrincipalDiagonal(updatedGrid);
     const diag2 = getReverseDiagonal(updatedGrid);
     const column = getColumn(updatedGrid, col);
+    let noSquaresLeft = false;
 
     switch (true) {
       case validate(updatedGrid[row]):
@@ -103,9 +104,9 @@ const TicTacToe = () => {
         }, []);
         break;
     }
-
+    noSquaresLeft = updatedGrid.every((i) => i.every((j) => j.player !== null));
     setGrid(updatedGrid);
-    setIsGameOver(isValid);
+    setIsGameOver(isValid || noSquaresLeft);
     setPlayer(currentPlayer === player1 ? player2 : player1);
     if (isValid) {
       const newScore = score;
