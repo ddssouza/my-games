@@ -3,10 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faO, faXmark } from "@fortawesome/free-solid-svg-icons";
 import "./TicTacToe.css";
 
+//TODO: Add play against computer
+
 const cols = 3;
 const rows = 3;
 const player1 = 1;
 const player2 = 2;
+const initialScore = { [player1]: 0, [player2]: 0 };
 
 const initialGrid = (rows, cols) =>
   [...Array(rows)].map((_, row) =>
@@ -39,7 +42,8 @@ const TicTacToe = () => {
   const [currentPlayer, setPlayer] = useState(1);
   const [grid, setGrid] = useState(initialGrid(rows, cols));
   const [isGameOver, setIsGameOver] = useState(false);
-  const [score, setScore] = useState({ [player1]: 0, [player2]: 0 });
+  const [isSinglePlayer, setIsSinglePlayer] = useState(false);
+  const [score, setScore] = useState({ ...initialScore });
 
   const handleUserSelection = ({ row, col }) => {
     let isValid = false;
@@ -117,8 +121,15 @@ const TicTacToe = () => {
   };
 
   const resetGame = () => {
+    //TODO: if machine is playing, and if it's player2's turn, after resetting, play next move
     setIsGameOver(false);
     setGrid(initialGrid(rows, cols));
+  };
+
+  const toggleSinglePlayer = () => {
+    resetGame();
+    setScore({ ...initialScore });
+    setIsSinglePlayer(!isSinglePlayer);
   };
 
   return (
@@ -141,21 +152,26 @@ const TicTacToe = () => {
         ))}
       </div>
       <div className="scores">
-        <div>
+        <div className={currentPlayer === player1 ? "active" : ""}>
           <h4>Player 1</h4>
           <p>{score[1]}</p>
         </div>
-        <div>
-          <h4>Player 2</h4>
+        <div className={currentPlayer === player2 ? "active" : ""}>
+          <h4>{isSinglePlayer ? "Machine" : "Player 2"}</h4>
           <p>{score[2]}</p>
         </div>
       </div>
       {isGameOver && <div className="game-over">Game Over!</div>}
       {isGameOver && (
-        <button className="reset" onClick={() => resetGame()}>
+        <button className="btn-purple" onClick={() => resetGame()}>
           Reset
         </button>
       )}
+      <br />
+      <br />
+      <button className="btn-purple" onClick={() => toggleSinglePlayer()}>
+        {isSinglePlayer ? "Two Players" : "Single Player"}
+      </button>
     </div>
   );
 };

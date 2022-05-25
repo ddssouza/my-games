@@ -18,7 +18,7 @@
 }
 
 .cell.winner:disabled {
-  background-color: var(--color-purple-light);
+  background-color: var(--color-purple-darker);
 }
 
 .cell:nth-child(2n) {
@@ -53,10 +53,10 @@
 }
 
 .scores > div {
-  width: 200px;
+  width: 150px;
 }
 
-.reset {
+.btn-purple {
   all: unset;
   background-color: var(--color-purple-dark);
   border-radius: 10px;
@@ -68,6 +68,10 @@
   font-size: 20px;
 }
 
-.reset:hover {
+.btn-purple:hover {
+  background-color: var(--color-purple-medium);
+}
+
+.active {
   background-color: var(--color-purple-medium);
 }
